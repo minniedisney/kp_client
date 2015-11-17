@@ -1,0 +1,19 @@
+<div id="container" ng-init="requestFavedData()" infinite-scroll="requestLoadMore()" infinite-scroll-disabled='requestService.isbusy()' infinite-scroll-distance='2'>
+    <div id="favSort">
+    </div>
+    <div id="imageCard" ng-repeat="image in imagesFaved">
+        <a href="" ng-click="openModal(image)">
+            <div id="videoCover" ng-class="videoCoverUpdate(image)"></div>
+            <img id="image" ng-src="{{image.low_resolution}}">
+        </a>
+        <div id="imageData">
+            <p id="authorName">{{image.create_username}}</p>
+            <div id="attention">
+                <img class="icon" ng-src="../image/clock.png">
+                <p>{{image.created_time | timeago}}</p>
+            </div>
+            <button id="favBtn" ng-click="favStateUpdate(image)" ng-class="favBtnUpdate(image)"></button>
+        </div>
+    </div>
+    <div id="noData" ng-if="nodata">{{noDataMessage}}</div>
+</div>

@@ -1,0 +1,41 @@
+<div id="container" ng-init="requestUserData()" infinite-scroll="requestLoadMore()" infinite-scroll-disabled='requestService.isbusy()' infinite-scroll-distance='2'>
+	<div id="userInfo">
+		<img class="round" ng-src="{{userAvatarUrl}}">
+		<h1>{{userName}}</h1>
+		<a href="/" ng-click="requestLogout()">LOG OUT</a>
+		<p>POSTS: {{userPost}} | FOLLOW: {{userFollow}} | FOLLOWER: {{userFollower}}</p>
+    </div>
+    <div id="imageCard" ng-repeat="image in images">
+        <a href="" ng-click="openModal(image)">
+            <div id="videoCover" ng-class="videoCoverUpdate(image)"></div>
+            <img id="image" ng-src="{{image.images.low_resolution.url}}">
+        </a>
+        <div id="imageData">
+            <img id="authorAvatar" ng-src="{{image.user.profile_picture}}">
+            <p id="authorName">{{image.user.username}}</p>
+            <div id="attention">
+                <img class="icon" ng-src="../image/clock.png">
+                <p>{{image.created_time | timeago}}</p>
+                <img class="icon" ng-src="../image/comment.png">
+                <p>{{image.comments.count}}</p>
+                <div class="icon" ng-style="likedIconUpdate(image)"></div>
+                <p>{{image.likes.count}}</p>
+            </div>
+            <button id="favBtn" ng-click="favStateUpdate(image)" ng-class="favBtnUpdate(image)"></button>
+        </div>
+    </div>
+    <div id="noData" ng-if="nodata">{{noDataMessage}}</div>
+    <div bn-modals ng-show="subview" class="m-modals" ng-switch="subview">
+        <div ng-switch-when="imageModal" ng-controller="imageModalCtrl" class="modal">
+            <video ng-src="{{trustSrc(image.videos.standard_resolution.url)}}" ng-class="{'hide': image.type === 'image'}" type="video/mp4" controls>Your browser does not support the video tag.</video>
+            <img ng-src="{{image.images.standard_resolution.url}}" ng-class="{'hide': image.type === 'video'}" >
+            <div id="containerMD">
+                <div id="titleMD">
+                    <img id="authorAvatar" ng-src="{{image.user.profile_picture}}">
+                    <p id="authorName">{{image.user.username}}</p>
+                </div>
+                <a ng-click="close()"></a>
+            </div>
+        </div>
+    </div>
+</div>

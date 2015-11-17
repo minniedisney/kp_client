@@ -1,0 +1,22 @@
+<div id="container" ng-init="requestLikedData()" infinite-scroll="requestLoadMore()" infinite-scroll-disabled='requestService.isbusy()' infinite-scroll-distance='2'>
+    <div id="imageCard" ng-repeat="image in imagesLiked">
+        <a href="" ng-click="openModal(image)">
+        	<div id="videoCover" ng-class="videoCoverUpdate(image)"></div>
+            <img id="image" ng-src="{{image.images.low_resolution.url}}">
+        </a>
+        <div id="imageData">
+            <img id="authorAvatar" ng-src="{{image.user.profile_picture}}">
+            <p id="authorName">{{image.user.username}}</p>
+            <div id="attention">
+                <img class="icon" ng-src="../image/clock.png">
+                <p>{{image.created_time | timeago}}</p>
+                <img class="icon" ng-src="../image/comment.png">
+                <p>{{image.comments.count}}</p>
+                <div class="icon" ng-style="likedIconUpdate(image)"></div>
+                <p>{{image.likes.count}}</p>
+            </div>
+            <button id="favBtn" ng-click="favStateUpdate(image)" ng-class="favBtnUpdate(image)"></button>
+        </div>
+    </div>
+    <div id="noData" ng-if="nodata">{{noDataMessage}}</div>
+</div>

@@ -1,0 +1,41 @@
+<div id="imageMd">
+    <video ng-show="imageType == 'video'" controls><source ng-src="{{trustSrc(imageUrl)}}">
+        Your browser does not support the video tag.
+    </video>
+    <img ng-show="imageType != 'video'" ng-src="{{imageUrl}}">
+    <div id="imageDataMd">
+        <div id="topBarMd">
+            <img class="round" ng-src="{{authorAvatarUrl}}">
+            <p>{{authorUsername}}</p>
+            <a id="closeMd" href="" ng-click="close()"></a>
+        </div>
+        <div id="comments">
+            <div id="caption">
+                <div id="attentionMd">
+                    <img class="icon" ng-src="../image/clock.png">
+                    <p>{{createTime | timeago}}</p>
+                    <img class="icon" ng-src="../image/comment.png">
+                    <p>{{commentsCount}}</p>
+                    <div class="icon" ng-style="likedIconUpdate()"></div>
+                    <p>{{likesCount}}</p>
+                </div>
+                <p ng-style="captionStyle">{{caption}}</p>
+                <p ng-show="showLinkContainer">
+                    <p ng-show="showMoreLink">
+                        <a href = "" ng-click="showMoreCaptionText()"><u style="color: black;">View full caption</u></a>
+                    </p>
+                    <p ng-show="showHideLink">
+                        <a href = "" ng-click="hideMoreCaptionText()"><u style="color: black;">Hide full caption</u></a>
+                    </p>
+                </p>
+            </div>
+            <div id="comment" ng-repeat="comment in comments">
+                <img class="round" ng-src="{{comment.from.profile_picture}}">
+                <p><b>{{comment.from.username}}</b> {{comment.text}}</p>
+                <p style="color:#9e9e9e;">{{comment.created_time | timeago}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fadeMd" ng-click="close()" ng-show="display">
+</div>

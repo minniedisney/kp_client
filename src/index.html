@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html ng-app="photoFeedApp" ng-style="htmlStyle">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Picfid - Collect photos from Instagram</title>
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+    <!--build-css-start-->
+    <link rel="stylesheet" href="css/main.css">
+    <!--build-css-end-->
+    <script src="vendor/angular.min.js"></script>
+    <script src="vendor/angular-route.min.js"></script>
+    <script src="vendor/angular-cookies.min.js"></script>
+    <script src="vendor/angular-sanitize.min.js"></script>
+    <script src="vendor/ng-infinite-scroll.js"></script>
+    <script src="vendor/angular-modal-service.js"></script>
+    <!--build-js-start-->
+    <script src="app.js"></script>
+    <script src="controllers/imageCtrl.js"></script>
+    <script src="controllers/mainCtrl.js"></script>
+    <script src="controllers/imageModal.js"></script>
+    <!--build-js-end-->
+</head>
+
+<body>
+    <div ng-controller="mainCtrl">
+        <!--div id="navBar" class="shadow">
+            <div id="logo"></div-->
+        <div ng-if="isAuthenticated()">
+            <div id="navBar" class="shadow">
+                <!--<input type="text" id="searchBar">-->
+                <ul ng-init="requestUserData()">
+                    <div id="navHighlight"></div>
+                    <li>
+                        <a href="/" id="navHome"></a>
+                    </li>
+                    <li>
+                        <a href="/liked">LIKED</a>
+                    </li>
+                    <li>
+                        <a href="/faved">FAVED</a>
+                    </li>
+                    <li>
+                        <a href="/user">{{userName}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--/div-->
+        <div ng-if="!isAuthenticated()">
+            <!--button id="loginBtn" class="roundCorner" ng-click="instagramLogin()">Sign in with Instagram</button-->
+            <div id="kpLogo"></div>
+            <div id="kpDisc"><p>YOUR FAVORATE PHOTO COLLECTION</p></div>
+            <button id="loginBtn" class="roundCorner" ng-click="instagramLogin()"><img id="igIcon" src="./image/igIcon.png"><p>Sign in with Instagram<p></button>           
+            <div id="rememberme">
+                <input type="checkbox" id="rmbmCheckBox">
+                <p>Remember me</p>
+            </div>
+        </div>
+        <div ng-if="isAuthenticated()">
+            <div id="messageBar"></div>
+            <div ng-view></div>
+        </div>
+    </div>
+</body>
+
+</html>
